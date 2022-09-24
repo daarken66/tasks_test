@@ -1,10 +1,9 @@
 import React from 'react';
-import Card from '@mui/material/Card';
-import { CardContent } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 
 const TaskCard = ({ children }) => {
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275, height: 1 }}>
       <CardContent>
         {children}
       </CardContent>
