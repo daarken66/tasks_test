@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTask } from './store/tasksSlice';
 import { Box, Grid } from '@mui/material';
-// import Grid from '@mui/material/Unstable_Grid2';
+
 
 import TasksList from './components/tasks-list/TasksList';
 import TaskDetail from './components/task-detail/TaskDetail';
@@ -35,6 +37,13 @@ const mockData = [
 ];
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // check local storage and populate data
+    dispatch(addTask(mockData))
+  }, []);
+
   const [selectedTask, setSelectedTask] = useState(null);
   const [selectedSubtask, setSelectedSubtask] = useState(null);
 
@@ -52,7 +61,7 @@ const App = () => {
       <Grid container spacing={1}>
         <Grid item xs={4}>
           <TaskCard>
-            <TasksList taskData={mockData} onSelectTask={onSelectTaskHandler} />
+            <TasksList onSelectTask={onSelectTaskHandler} />
           </TaskCard>
         </Grid>
 

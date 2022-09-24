@@ -1,9 +1,12 @@
 import React from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Button } from '@mui/material';
 import Task from '../task/Task';
 
-const TasksList = ({ taskData, onSelectTask }) => {
+const TasksList = ({ onSelectTask }) => {
+  const { tasks } = useSelector((state) => state.tasks);
 
+  console.log(tasks)
   return (
     <div>
       <div>
@@ -14,7 +17,7 @@ const TasksList = ({ taskData, onSelectTask }) => {
       </div>
 
       <div>
-        {taskData && taskData.length > 0 && taskData.map(task => (
+        {tasks && tasks.length > 0 && tasks.map(task => (
           <Task
             key={task.id}
             id={task.id}
