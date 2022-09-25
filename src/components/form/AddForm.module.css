@@ -1,0 +1,13 @@
+.form {
+    width: 100%;
+}
+
+.form input[type="text"],
+.form textarea {
+    width: 100%;
+    margin-bottom: 1.2rem;
+}
+
+.label {
+    display: block;
+}

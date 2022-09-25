@@ -1,50 +1,107 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { Button } from '@mui/material';
+import { Button, TextareaAutosize } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { addTask } from '../../store/tasksSlice'
+import { MuiColorInput } from 'mui-color-input'
+import styles from './AddForm.module.css';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 
 const AddForm = () => {
+    const { taskTypes } = useSelector((state) => state.taskTypes);
+    const { addingTask } = useSelector(state => state.addItem);
+    const [color, setColor] = useState('#ffffff');
+    const [taskType, setTaskType] = useState('');
+    const dispatch = useDispatch();
+
+    const onChangeColorHandler = (color) => {
+        setColor(color)
+    };
+
+    const onChangeTaskTypeHandler = (taskType) => {
+        setTaskType(taskType)
+    };
+
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
-            email: '',
+            title: '',
+            author: '',
+            description: '',
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            const dataObject = {
+                ...values,
+                id: values.title,
+                color,
+                taskType,
+                subtasks: []
+            }
+            dispatch(addTask([dataObject]));
         },
     });
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="firstName">First Name</label>
-            <input
-                id="firstName"
-                name="firstName"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.firstName}
-            />
+        <>
+            <h1>{addingTask ? 'Add new task' : 'Add new subtask'}</h1>
+            <form onSubmit={formik.handleSubmit} className={styles.form}>
 
-            <label htmlFor="lastName">Last Name</label>
-            <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.lastName}
-            />
+                <label htmlFor="color" className={styles.label}>Select color</label>
+                <MuiColorInput
+                    id="color"
+                    name="color"
+                    value={color}
+                    onChange={onChangeColorHandler}
+                    style={{ width: '100%' }}
+                />
 
-            <label htmlFor="email">Email Address</label>
-            <input
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-            />
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Task Type</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={taskType}
+                        label="Type"
+                        onChange={(e) => onChangeTaskTypeHandler(e.target.value)}
+                    >
+                        {taskTypes && taskTypes.length > 0 && taskTypes.map((task) => (<MenuItem value={task}>{task}</MenuItem>))}
 
-            <Button colour="secondary" variant="outlined" type="submit">Submit</Button>
-        </form>
+                    </Select>
+                </FormControl>
 
+                <label htmlFor="title" className={styles.label}>Title</label>
+                <input
+                    id="title"
+                    name="title"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.firstName}
+                />
+
+                <label htmlFor="author" className={styles.label}>Author</label>
+                <input
+                    id="author"
+                    name="author"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.lastName}
+                />
+
+                <label htmlFor="description" className={styles.label}>Description</label>
+                <TextareaAutosize
+                    id="description"
+                    name="description"
+                    type="textarea"
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                    className={styles.label}
+                />
+
+                <Button colour="secondary" variant="outlined" type="submit">Submit</Button>
+            </form>
+        </>
     );
 };
 

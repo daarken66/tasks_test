@@ -44,8 +44,6 @@ const App = () => {
   const { selectedTask } = useSelector(state => state.selected);
   const { addingTask, addingSubtask } = useSelector(state => state.addItem);
 
-  console.log(addingTask);
-
   useEffect(() => {
     dispatch(addTask(mockData))
 
