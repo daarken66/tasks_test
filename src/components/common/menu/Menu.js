@@ -4,18 +4,18 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const options = [
-	"Copy",
-	"Delete"
-];
+// const options = [
+// 	"Copy",
+// 	"Delete"
+// ];
 
-const copyLog = () => {
-	return console.log("COPY")
-}
+// const copyLog = () => {
+// 	return console.log("COPY")
+// }
 
-const deleteLog = () => {
-	return console.log("DELETE")
-}
+// const deleteLog = () => {
+// 	return console.log("DELETE")
+// }
 
 
 const ITEM_HEIGHT = 48;

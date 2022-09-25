@@ -1,8 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { updateSelectedSubtask } from '../../store/selectedSlice'
 import { Typography } from '@mui/material';
 import SubTask from "../subtask/SubTask"
 
-const SubtaskList = ({ subtaskData, onSelectSubtask }) => {
+const SubtaskList = () => {
+	const { selectedTask } = useSelector(state => state.selected);
+	const dispatch = useDispatch();
+	let subtasks = [];
+
+	if (selectedTask.subtasks && selectedTask.subtasks.length > 0) {
+		subtasks = selectedTask.subtasks;
+	}
 
 	return (
 		<div>
@@ -12,12 +21,12 @@ const SubtaskList = ({ subtaskData, onSelectSubtask }) => {
 				</Typography>
 			</div>
 			<div>
-				{subtaskData && subtaskData.length > 0 ? subtaskData.map((subtask, index) => (
+				{subtasks.length > 0 ? subtasks.map((subtask, index) => (
 					<SubTask
 						key={index}
 						id={subtask.id}
 						title={subtask.title}
-						onSelectSubtask={() => onSelectSubtask(subtask)}
+						onSelectSubtask={() => dispatch(updateSelectedSubtask(subtask))}
 					/>
 				))
 					:

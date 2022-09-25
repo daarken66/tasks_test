@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material';
-import { fontWeight } from '@mui/system';
+
 
 const theme = createTheme({
     typography: {
