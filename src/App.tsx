@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useTypedDispatch, useTypedSelector } from './hooks/typedHooks';
 import { addTask } from './store/tasksSlice';
 import { updateTaskTypes } from './store/taskTypeSlice';
 import { Box, Grid } from '@mui/material';
@@ -11,12 +11,13 @@ import SubtaskList from './components/subtask-list/SubtaskList';
 import TaskCard from './components/common/task-card/TaskCard';
 import AddForm from './components/form/AddForm';
 import Modal from './components/common/modal/Modal';
+import { ImportedTypes } from './components/Interfaces/SliceInterfaces';
 
 const mockData = [
   {
     id: 'asktjal',
     title: 'Task 1',
-    type: 'Todo',
+    taskType: 'Todo',
     color: 'rgb(246, 216, 186)',
     author: 'Ludvik III',
     description:
@@ -25,25 +26,25 @@ const mockData = [
       {
         id: 'a1',
         title: 'Subtask 1',
-        type: 'subtask',
+        taskType: 'subtask',
         color: 'rgb(246, 216, 186)',
       },
       {
         id: 'a12',
         title: 'Subtask 2',
-        type: 'Todo',
+        taskType: 'Todo',
         color: 'rgb(246, 216, 186)',
       },
       {
         id: 'a1da',
         title: 'Subtask 5',
-        type: 'Todo',
+        taskType: 'Todo',
         color: 'rgb(246, 216, 186)',
       },
       {
         id: 'adawda1',
         title: 'Subtask dw',
-        type: 'Todo',
+        taskType: 'Todo',
         color: 'rgb(246, 216, 186)',
       },
     ],
@@ -51,7 +52,7 @@ const mockData = [
   {
     id: '2',
     title: 'Task 2',
-    type: 'Todo 2',
+    taskType: 'Todo 2',
     color: 'rgb(246, 216, 124)',
     author: 'Arthur',
     description:
@@ -60,31 +61,31 @@ const mockData = [
       {
         id: '2daw',
         title: 'Subtask 2',
-        type: 'Todo 2',
+        taskType: 'Todo 2',
         color: 'rgb(246, 216, 124)',
       },
       {
         id: '2kdakl',
         title: 'Subtask 2',
-        type: 'Todo 2',
+        taskType: 'Todo 2',
         color: 'rgb(246, 216, 124)',
       },
       {
         id: '2lajkdkla',
         title: 'Subtask 2',
-        type: 'Todo 2',
+        taskType: 'Todo 2',
         color: 'rgb(246, 216, 124)',
       },
       {
         id: '2kdnakjhdw',
         title: 'Subtask 2',
-        type: 'Todo 2',
+        taskType: 'Todo 2',
         color: 'rgb(246, 216, 124)',
       },
       {
         id: '2kdnakjhdw',
         title: 'Subtask 2',
-        type: 'Todo 2',
+        taskType: 'Todo 2',
         color: 'rgb(246, 216, 124)',
       },
     ],
@@ -92,7 +93,7 @@ const mockData = [
   {
     id: '3',
     title: 'Task 3',
-    type: 'Todo da',
+    taskType: 'Todo da',
     color: 'rgb(246, 216, 24)',
     author: 'King Richard',
     description: 'lorem ipsum test neco nic text specialni popis tasku',
@@ -101,14 +102,16 @@ const mockData = [
 ];
 
 const App = () => {
-  const dispatch = useDispatch();
-  const { selectedTask } = useSelector((state) => state.selected);
-  const { addingTask, addingSubtask } = useSelector((state) => state.addItem);
+  const dispatch = useTypedDispatch();
+  const { selectedTask } = useTypedSelector((state) => state.selected);
+  const { addingTask, addingSubtask } = useTypedSelector(
+    (state) => state.addItem
+  );
 
   useEffect(() => {
     dispatch(addTask(mockData));
 
-    const getTaskTypes = async () => {
+    const getTasktaskTypes = async () => {
       const response = await axios({
         method: 'get',
         url: process.env.REACT_APP_API_URL,
@@ -116,12 +119,12 @@ const App = () => {
 
       let taskTypes = [];
       if (response.data && response.data.length > 0) {
-        taskTypes = response.data.map((item) => item.username);
+        taskTypes = response.data.map((item: ImportedTypes) => item.username);
       }
       dispatch(updateTaskTypes(taskTypes));
     };
 
-    getTaskTypes();
+    getTasktaskTypes();
   }, []);
 
   return (

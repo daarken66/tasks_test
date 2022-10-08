@@ -1,5 +1,4 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useTypedDispatch, useTypedSelector } from '../../hooks/typedHooks';
 import {
   updateSelectedSubtask,
   updateSelectedTask,
@@ -7,9 +6,9 @@ import {
 import { Typography, Button } from '@mui/material';
 
 const TaskDetail = () => {
-  const { selectedSubtask } = useSelector((state) => state.selected);
-  const { selectedTask } = useSelector((state) => state.selected);
-  const dispatch = useDispatch();
+  const { selectedSubtask } = useTypedSelector((state) => state.selected);
+  const { selectedTask } = useTypedSelector((state) => state.selected);
+  const dispatch = useTypedDispatch();
 
   const data = selectedSubtask ? selectedSubtask : selectedTask;
   const title = selectedSubtask ? 'Subtask detail' : 'Task detail';
@@ -47,7 +46,7 @@ const TaskDetail = () => {
               Id:<span>{data.id}</span>
             </p>
             <p>
-              Type:<span>{data.type}</span>
+              Type:<span>{data.taskType}</span>
             </p>
             <p>
               Name:<span>{data.title}</span>

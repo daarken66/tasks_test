@@ -30,7 +30,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build": "tsc"
-    
   },
   "eslintConfig": {
     "extends": [
@@ -49,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dts-css-modules-loader": "^2.0.1"
   }
 }

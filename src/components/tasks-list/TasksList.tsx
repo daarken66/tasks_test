@@ -33,7 +33,7 @@ const TasksList = () => {
               id={task.id}
               color={task.color}
               title={task.title}
-              taskType={task.type}
+              taskType={task.taskType}
               subtasksCount={task.subtasks.length}
               onSelectTask={() => dispatch(updateSelectedTask(task))}
             />

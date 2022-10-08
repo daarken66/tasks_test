@@ -1,21 +1,36 @@
 import React, { useState } from 'react';
-import { useFormik } from 'formik';
+import { useTypedDispatch, useTypedSelector } from '../../hooks/typedHooks';
+
+import { useFormik, FormikHelpers } from 'formik';
 import { Button, TextareaAutosize } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
-import { addTask } from '../../store/tasksSlice';
 import { MuiColorInput } from 'mui-color-input';
-import styles from './AddForm.module.css';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import { addTask } from '../../store/tasksSlice';
+import styles from './AddForm.module.css';
+import {
+  ImportedTypes,
+  TaskTypeSliceInterface,
+} from '../Interfaces/SliceInterfaces';
+
+interface Values {
+  title: string;
+  color: string;
+  author: string;
+  description: string;
+  // DOŘEŠIT!!!
+  taskType: TaskTypeSliceInterface | string | ImportedTypes;
+}
+
 const AddForm = () => {
-  const { taskTypes } = useSelector((state) => state.taskTypes);
-  const { addingTask } = useSelector((state) => state.addItem);
+  const { taskTypes } = useTypedSelector((state) => state.taskTypes);
+  const { addingTask } = useTypedSelector((state) => state.addItem);
   const [color, setColor] = useState('#ffffff');
   const [taskType, setTaskType] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
 
   const onChangeColorHandler = (color) => {
     setColor(color);
@@ -31,10 +46,10 @@ const AddForm = () => {
       author: '',
       description: '',
     },
-    onSubmit: (values) => {
+    onSubmit: (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
       const dataObject = {
         ...values,
-        id: values.title,
+        title: values.title,
         color,
         taskType,
         subtasks: [],
@@ -80,7 +95,7 @@ const AddForm = () => {
           name='title'
           type='text'
           onChange={formik.handleChange}
-          value={formik.values.firstName}
+          value={formik.values.title}
         />
 
         <label htmlFor='author' className={styles.label}>
@@ -91,7 +106,7 @@ const AddForm = () => {
           name='author'
           type='text'
           onChange={formik.handleChange}
-          value={formik.values.lastName}
+          value={formik.values.author}
         />
 
         <label htmlFor='description' className={styles.label}>
@@ -102,7 +117,7 @@ const AddForm = () => {
           name='description'
           type='textarea'
           onChange={formik.handleChange}
-          value={formik.values.email}
+          value={formik.values.description}
           className={styles.label}
         />
 

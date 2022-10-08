@@ -6,7 +6,7 @@ export interface AddItemStateSliceInterface {
 export interface TaskSliceInterface {
   id: string;
   title: string;
-  type: string;
+  taskType: string;
   color: string;
   author: string;
   description: string;
@@ -16,7 +16,7 @@ export interface TaskSliceInterface {
 export interface SubtaskSliceInterface {
   id: string;
   title: string;
-  type: string;
+  taskType: string;
   color: string;
 }
 
