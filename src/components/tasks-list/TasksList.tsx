@@ -1,13 +1,14 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Button } from '@mui/material';
+
 import Task from '../task/Task';
 import { updateSelectedTask } from '../../store/selectedSlice';
 import { addTask } from '../../store/addItemSlice';
+import { useTypedSelector, useTypedDispatch } from '../../hooks/typedHooks';
 
 const TasksList = () => {
-  const { tasks } = useSelector((state) => state.tasks);
-  const dispatch = useDispatch();
+  const { tasks } = useTypedSelector((state) => state.tasks);
+  const dispatch = useTypedDispatch();
 
   return (
     <div>

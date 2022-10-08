@@ -1,15 +1,16 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useTypedDispatch, useTypedSelector } from '../../hooks/typedHooks';
 import { updateSelectedSubtask } from '../../store/selectedSlice';
+import { SubtaskSliceInterface } from '../Interfaces/SliceInterfaces';
 import { Typography } from '@mui/material';
 import SubTask from '../subtask/SubTask';
 
 const SubtaskList = () => {
-  const { selectedTask } = useSelector((state) => state.selected);
-  const dispatch = useDispatch();
-  let subtasks = [];
+  const { selectedTask } = useTypedSelector((state) => state.selected);
+  const dispatch = useTypedDispatch();
+  let subtasks: SubtaskSliceInterface[] = [];
 
-  if (selectedTask.subtasks && selectedTask.subtasks.length > 0) {
+  if (selectedTask?.subtasks && selectedTask.subtasks.length > 0) {
     subtasks = selectedTask.subtasks;
   }
 

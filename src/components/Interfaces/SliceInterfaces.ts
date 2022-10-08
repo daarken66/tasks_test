@@ -10,7 +10,7 @@ export interface TaskSliceInterface {
   color: string;
   author: string;
   description: string;
-  subtasks: SubtaskSliceInterface;
+  subtasks: SubtaskSliceInterface[];
 }
 
 export interface SubtaskSliceInterface {
@@ -27,10 +27,9 @@ export interface SelectedTaskSliceInterface {
 
 export interface TaskListSliceInterface {
   tasks: TaskSliceInterface[];
-  filter?(): TaskSliceInterface | null;
 }
 
-interface ImportedTypes {
+export interface ImportedTypes {
   id: number;
   name: string;
   username: string;

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { closeAddItem } from '../../../store/addItemSlice';
-import { useDispatch } from 'react-redux';
+import { useTypedDispatch } from '../../../hooks/typedHooks';
 
 const clickAwayStyle = {
   position: 'fixed',
@@ -12,7 +12,7 @@ const clickAwayStyle = {
   minHeight: '100%',
   zIndex: 2,
   background: 'none',
-};
+} as React.CSSProperties;
 
 const modalStyle = {
   position: 'absolute',
@@ -27,10 +27,14 @@ const modalStyle = {
   borderRadius: '12px',
   boxShadow: '0 4px 12px 4px rgba(0,0,0,0.12)',
   padding: '2rem',
-};
+} as React.CSSProperties;
 
-const Modal = ({ children }) => {
-  const dispatch = useDispatch();
+interface ModalProps {
+  children: ReactNode;
+}
+
+const Modal = ({ children }: ModalProps) => {
+  const dispatch = useTypedDispatch();
 
   return (
     <>

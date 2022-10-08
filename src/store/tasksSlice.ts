@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TaskListSliceInterface } from '../components/Interfaces/SliceInterfaces';
+import {
+  TaskListSliceInterface,
+  TaskSliceInterface,
+} from '../components/Interfaces/SliceInterfaces';
 
 const initialState: TaskListSliceInterface = {
   tasks: [],
@@ -9,11 +12,10 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    addTask: (state, action: PayloadAction<[]>) => {
+    addTask: (state, action: PayloadAction<TaskSliceInterface[]>) => {
       state.tasks = [...state.tasks, ...action.payload];
     },
-    // CHANGE ANY!!!
-    deleteTask: (state, action: any) => {
+    deleteTask: (state, action: PayloadAction<string>) => {
       state.tasks.filter((task) => task.id !== action.payload);
     },
     // addSubtask: (state, action) => {

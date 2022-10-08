@@ -3,7 +3,23 @@ import { Typography, Stack, Divider, Button, Grid } from '@mui/material';
 
 import LongMenu from '../common/menu/Menu';
 
-const Task = ({ id, color, title, taskType, subtasksCount, onSelectTask }) => {
+interface TaskProps {
+  id: string;
+  color: string;
+  title: string;
+  taskType: string;
+  subtasksCount: number;
+  onSelectTask: () => void;
+}
+
+const Task = ({
+  id,
+  color,
+  title,
+  taskType,
+  subtasksCount,
+  onSelectTask,
+}: TaskProps) => {
   return (
     <Stack spacing={1} padding={1}>
       <Grid container>

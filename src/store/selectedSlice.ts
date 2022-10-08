@@ -14,12 +14,15 @@ export const selectedSlice = createSlice({
   name: 'selected',
   initialState,
   reducers: {
-    updateSelectedTask: (state, action: PayloadAction<TaskSliceInterface>) => {
+    updateSelectedTask: (
+      state,
+      action: PayloadAction<TaskSliceInterface | null>
+    ) => {
       state.selectedTask = action.payload;
     },
     updateSelectedSubtask: (
       state,
-      action: PayloadAction<SubtaskSliceInterface>
+      action: PayloadAction<SubtaskSliceInterface | null>
     ) => {
       state.selectedSubtask = action.payload;
     },
