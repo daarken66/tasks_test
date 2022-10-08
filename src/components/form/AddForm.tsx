@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/typedHooks';
 
-import { useFormik, FormikHelpers } from 'formik';
+import { useFormik } from 'formik';
 import { Button, TextareaAutosize } from '@mui/material';
 import { MuiColorInput } from 'mui-color-input';
 import InputLabel from '@mui/material/InputLabel';
@@ -11,18 +11,13 @@ import Select from '@mui/material/Select';
 
 import { addTask } from '../../store/tasksSlice';
 import styles from './AddForm.module.css';
-import {
-  ImportedTypes,
-  TaskTypeSliceInterface,
-} from '../Interfaces/SliceInterfaces';
 
-interface Values {
+interface FormValues {
   title: string;
   color: string;
   author: string;
   description: string;
-  // DOŘEŠIT!!!
-  taskType: TaskTypeSliceInterface | string | ImportedTypes;
+  taskType: string;
 }
 
 const AddForm = () => {
@@ -32,12 +27,12 @@ const AddForm = () => {
   const [taskType, setTaskType] = useState('');
   const dispatch = useTypedDispatch();
 
-  const onChangeColorHandler = (color) => {
+  const onChangeColorHandler = (color: React.SetStateAction<string>) => {
     setColor(color);
   };
 
-  const onChangeTaskTypeHandler = (taskType) => {
-    setTaskType(taskType);
+  const onChangeTaskTypeHandler = (task: React.SetStateAction<string>) => {
+    setTaskType(task);
   };
 
   const formik = useFormik({
@@ -45,14 +40,17 @@ const AddForm = () => {
       title: '',
       author: '',
       description: '',
+      color: '',
+      taskType: '',
     },
-    onSubmit: (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
+    onSubmit: (values: FormValues) => {
       const dataObject = {
         ...values,
         title: values.title,
         color,
         taskType,
         subtasks: [],
+        id: '',
       };
       dispatch(addTask([dataObject]));
     },
@@ -81,9 +79,10 @@ const AddForm = () => {
             label='Type'
             onChange={(e) => onChangeTaskTypeHandler(e.target.value)}
           >
-            {taskTypes &&
-              taskTypes.length > 0 &&
-              taskTypes.map((task) => <MenuItem value={task}>{task}</MenuItem>)}
+            {taskTypes?.length > 0 &&
+              taskTypes.map((task: any) => (
+                <MenuItem value={task}>{task}</MenuItem>
+              ))}
           </Select>
         </FormControl>
 
@@ -115,13 +114,12 @@ const AddForm = () => {
         <TextareaAutosize
           id='description'
           name='description'
-          type='textarea'
           onChange={formik.handleChange}
           value={formik.values.description}
           className={styles.label}
         />
 
-        <Button colour='secondary' variant='outlined' type='submit'>
+        <Button variant='outlined' type='submit'>
           Submit
         </Button>
       </form>
