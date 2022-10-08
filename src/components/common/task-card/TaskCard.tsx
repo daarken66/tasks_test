@@ -1,7 +1,11 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { Card, CardContent } from '@mui/material';
 
-const TaskCard = ({ children }) => {
+interface ChildrenProps {
+  children?: ReactNode;
+}
+
+const TaskCard = ({ children }: ChildrenProps) => {
   return (
     <Card sx={{ minWidth: 275, height: 1 }}>
       <CardContent>{children}</CardContent>

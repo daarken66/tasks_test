@@ -1,28 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  TaskSliceInterface,
+  SubtaskSliceInterface,
+  SelectedTaskSliceInterface,
+} from '../components/Interfaces/SliceInterfaces';
 
-export interface Task {
-  id: string;
-  title: string;
-  type: string;
-  color: string;
-  author: string;
-  description: string;
-  subtasks: Subtask;
-}
-
-export interface Subtask {
-  id: string;
-  title: string;
-  type: string;
-  color: string;
-}
-
-interface SelectedTaskInterface {
-  selectedTask: null | Task;
-  selectedSubtask: null | Subtask;
-}
-
-const initialState: SelectedTaskInterface = {
+const initialState: SelectedTaskSliceInterface = {
   selectedTask: null,
   selectedSubtask: null,
 };
@@ -31,11 +14,13 @@ export const selectedSlice = createSlice({
   name: 'selected',
   initialState,
   reducers: {
-    updateSelectedTask: (state, action: PayloadAction<Task>) => {
+    updateSelectedTask: (state, action: PayloadAction<TaskSliceInterface>) => {
       state.selectedTask = action.payload;
-      console.log(action.payload);
     },
-    updateSelectedSubtask: (state, action: PayloadAction<Subtask>) => {
+    updateSelectedSubtask: (
+      state,
+      action: PayloadAction<SubtaskSliceInterface>
+    ) => {
       state.selectedSubtask = action.payload;
     },
   },

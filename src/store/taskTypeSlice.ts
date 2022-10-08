@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TaskTypeSliceInterface } from '../components/Interfaces/SliceInterfaces';
 
-const initialState = {
+const initialState: TaskTypeSliceInterface = {
   taskTypes: [],
 };
 

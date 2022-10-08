@@ -1,11 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AddItemStateSliceInterface } from '../components/Interfaces/SliceInterfaces';
 
-export interface AddItemStateInterface {
-  addingTask: boolean;
-  addingSubtask: boolean;
-}
-
-const initialState: AddItemStateInterface = {
+const initialState: AddItemStateSliceInterface = {
   addingTask: false,
   addingSubtask: false,
 };

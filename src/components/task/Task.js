@@ -15,7 +15,9 @@ const Task = ({ id, color, title, taskType, subtasksCount, onSelectTask }) => {
             style={{ width: 480, height: 50 }}
           >
             <Stack direction='row' padding={1} spacing={1}>
-              <div style={{ background: color }}>color</div>
+              <div id={id} style={{ background: color }}>
+                color
+              </div>
               <Divider orientation='vertical' flexItem />
               <Typography variant='h3'>{title}</Typography>
               <Typography variant='h3'>Type: {taskType}</Typography>

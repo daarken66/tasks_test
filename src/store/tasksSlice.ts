@@ -1,17 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TaskListSliceInterface } from '../components/Interfaces/SliceInterfaces';
 
-const initialState = {
+const initialState: TaskListSliceInterface = {
   tasks: [],
 };
 
-export const tasksSlice = createSlice({
+const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    addTask: (state, action) => {
+    addTask: (state, action: PayloadAction<[]>) => {
       state.tasks = [...state.tasks, ...action.payload];
     },
-    deleteTask: (state, action) => {
+    // CHANGE ANY!!!
+    deleteTask: (state, action: any) => {
       state.tasks.filter((task) => task.id !== action.payload);
     },
     // addSubtask: (state, action) => {
