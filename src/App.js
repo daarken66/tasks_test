@@ -14,51 +14,112 @@ import Modal from './components/common/modal/Modal';
 
 const mockData = [
   {
-    id: '1', title: 'Task 1', type: 'Todo', color: 'rgb(246, 216, 186)', author: 'Ludvik III',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    id: 'asktjal',
+    title: 'Task 1',
+    type: 'Todo',
+    color: 'rgb(246, 216, 186)',
+    author: 'Ludvik III',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     subtasks: [
-      { id: 'a1', title: 'Subtask 1', type: 'subtask', color: 'rgb(246, 216, 186)' },
-      { id: 'a12', title: 'Subtask 2', type: 'Todo', color: 'rgb(246, 216, 186)' },
-      { id: 'a1da', title: 'Subtask 5', type: 'Todo', color: 'rgb(246, 216, 186)' },
-      { id: 'adawda1', title: 'Subtask dw', type: 'Todo', color: 'rgb(246, 216, 186)' },
-    ]
+      {
+        id: 'a1',
+        title: 'Subtask 1',
+        type: 'subtask',
+        color: 'rgb(246, 216, 186)',
+      },
+      {
+        id: 'a12',
+        title: 'Subtask 2',
+        type: 'Todo',
+        color: 'rgb(246, 216, 186)',
+      },
+      {
+        id: 'a1da',
+        title: 'Subtask 5',
+        type: 'Todo',
+        color: 'rgb(246, 216, 186)',
+      },
+      {
+        id: 'adawda1',
+        title: 'Subtask dw',
+        type: 'Todo',
+        color: 'rgb(246, 216, 186)',
+      },
+    ],
   },
   {
-    id: '2', title: 'Task 2', type: 'Todo 2', color: 'rgb(246, 216, 124)', author: 'Arthur', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    id: '2',
+    title: 'Task 2',
+    type: 'Todo 2',
+    color: 'rgb(246, 216, 124)',
+    author: 'Arthur',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     subtasks: [
-      { id: '2daw', title: 'Subtask 2', type: 'Todo 2', color: 'rgb(246, 216, 124)' },
-      { id: '2kdakl', title: 'Subtask 2', type: 'Todo 2', color: 'rgb(246, 216, 124)' },
-      { id: '2lajkdkla', title: 'Subtask 2', type: 'Todo 2', color: 'rgb(246, 216, 124)' },
-      { id: '2kdnakjhdw', title: 'Subtask 2', type: 'Todo 2', color: 'rgb(246, 216, 124)' },
-      { id: '2kdnakjhdw', title: 'Subtask 2', type: 'Todo 2', color: 'rgb(246, 216, 124)' },
-    ]
+      {
+        id: '2daw',
+        title: 'Subtask 2',
+        type: 'Todo 2',
+        color: 'rgb(246, 216, 124)',
+      },
+      {
+        id: '2kdakl',
+        title: 'Subtask 2',
+        type: 'Todo 2',
+        color: 'rgb(246, 216, 124)',
+      },
+      {
+        id: '2lajkdkla',
+        title: 'Subtask 2',
+        type: 'Todo 2',
+        color: 'rgb(246, 216, 124)',
+      },
+      {
+        id: '2kdnakjhdw',
+        title: 'Subtask 2',
+        type: 'Todo 2',
+        color: 'rgb(246, 216, 124)',
+      },
+      {
+        id: '2kdnakjhdw',
+        title: 'Subtask 2',
+        type: 'Todo 2',
+        color: 'rgb(246, 216, 124)',
+      },
+    ],
   },
   {
-    id: '3', title: 'Task 3', type: 'Todo da', color: 'rgb(246, 216, 24)', author: 'King Richard', description: "lorem ipsum test neco nic text specialni popis tasku",
-    subtasks: []
+    id: '3',
+    title: 'Task 3',
+    type: 'Todo da',
+    color: 'rgb(246, 216, 24)',
+    author: 'King Richard',
+    description: 'lorem ipsum test neco nic text specialni popis tasku',
+    subtasks: [],
   },
 ];
 
 const App = () => {
   const dispatch = useDispatch();
-  const { selectedTask } = useSelector(state => state.selected);
-  const { addingTask, addingSubtask } = useSelector(state => state.addItem);
+  const { selectedTask } = useSelector((state) => state.selected);
+  const { addingTask, addingSubtask } = useSelector((state) => state.addItem);
 
   useEffect(() => {
-    dispatch(addTask(mockData))
+    dispatch(addTask(mockData));
 
     const getTaskTypes = async () => {
       const response = await axios({
         method: 'get',
-        url: process.env.REACT_APP_API_URL
+        url: process.env.REACT_APP_API_URL,
       });
 
       let taskTypes = [];
       if (response.data && response.data.length > 0) {
-        taskTypes = response.data.map(item => item.username)
+        taskTypes = response.data.map((item) => item.username);
       }
-      dispatch(updateTaskTypes(taskTypes))
-    }
+      dispatch(updateTaskTypes(taskTypes));
+    };
 
     getTaskTypes();
   }, []);
@@ -90,9 +151,13 @@ const App = () => {
         </Grid>
       </Box>
 
-      {(addingTask || addingSubtask) && <Modal><AddForm /></Modal>}
+      {(addingTask || addingSubtask) && (
+        <Modal>
+          <AddForm />
+        </Modal>
+      )}
     </>
   );
-}
+};
 
 export default App;
